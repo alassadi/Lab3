@@ -10,17 +10,10 @@ public class Person {
 
 
 
-    private UUID mUUID;
     private String name;
     private String password;
-    private Account account;
 
-    public UUID getUUID() {
-        return mUUID;
-    }
-    public String getName() {
-        return name;
-    }
+
 
 
     public String getPassword() {
@@ -29,21 +22,13 @@ public class Person {
 
 
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 
 
 
-    public Person(UUID UUID, String name, String password, Account account) {
-        mUUID = UUID;
+
+    public Person( String name, String password, Account account) {
         this.name = name;
         this.password = password;
-        this.account = account;
     }
 
 
