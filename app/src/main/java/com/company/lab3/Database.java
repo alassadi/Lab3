@@ -56,22 +56,22 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.close();
 
     }
-    public String[] showBalance(String userName){
+    public String showBalance(String userName){
         SQLiteDatabase sqLiteDatabase=this.getReadableDatabase();
         String balance=null;
         String query="SELECT * FROM " + ACCOUNT_TABLE.TABLE_NAME + "WHERE USER_NAME="+ userName;
         Cursor cursor=sqLiteDatabase.rawQuery(query,null);
-        String[]balanceInfo=new String[0];
+        //String[]balanceInfo=new String[0];
         cursor.moveToNext();
 
-        if (cursor.getCount()>0){
+        if (cursor.getCount()>=0){
             balance=cursor.getString(cursor.getColumnIndex(ACCOUNT_TABLE.USER_BALANCE));
         } else {
             Toast.makeText(context,"Try Again",Toast.LENGTH_SHORT).show();
         }
         cursor.close();
         sqLiteDatabase.close();
-        return balanceInfo;
+        return balance;
     }
     public void uppdateBalance(String userName, int balance){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
