@@ -1,3 +1,5 @@
+package com.company.lab3;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -34,7 +36,7 @@ public class Database extends SQLiteOpenHelper {
                 + ACCOUNT_TABLE.USER_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ACCOUNT_TABLE.USER_NAME + "VARCHAR (255), "
                 + ACCOUNT_TABLE.USER_PASSWORD + "VARCHAR (255), "
-                + ACCOUNT_TABLE.USER_BALANCE + "INTEGER, "
+                + ACCOUNT_TABLE.USER_BALANCE + "VARCHAR, "
                 +")";
     }
 
@@ -42,7 +44,7 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-    public void createAccount(String userName, String password, int balace){
+    public void createAccount(String userName, String password, String balace){
 
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
@@ -80,6 +82,25 @@ public class Database extends SQLiteOpenHelper {
                 String.valueOf(userName)
         });
         sqLiteDatabase.close();
+    }
+    public boolean checkUser(String userName, String password){
+
+        SQLiteDatabase sqLiteDatabase=this.getReadableDatabase();
+        String query="SELECT * FROM " + ACCOUNT_TABLE.TABLE_NAME + "WHERE USER_NAME="+ userName;
+        Cursor cursor=sqLiteDatabase.rawQuery(query,null);
+        String[]useerInfo=new String[0];
+        cursor.moveToNext();
+
+        if (cursor.getCount()>0){
+            String firstpassword=cursor.getString(cursor.getColumnIndex(ACCOUNT_TABLE.USER_PASSWORD));
+            if (password!=firstpassword){
+                Toast.makeText(context,"Wrong password!!",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return true;
     }
 
 }

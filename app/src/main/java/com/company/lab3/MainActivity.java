@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView balance;
     private EditText withdrawMoney;
     private Account mAccount;
+    private Database mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         balance = (TextView)findViewById(R.id.balance);
+        String[] balanceInfo=mDatabase.showBalance("hannah");
+       if (balanceInfo.length>0){
+           balance.setText(balanceInfo[0]);
+       }
         withdrawMoney = (EditText)findViewById(R.id.edittext);
 
 
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         withdraw.setOnClickListener( new View.OnClickListener(){
             public void onClick (View v){
                 updateBalance();
+
                 //updateDatabase();
                 //Set new balance to Textview from Database
                 //activity refresh the balance/activity
