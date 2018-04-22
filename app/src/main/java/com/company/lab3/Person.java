@@ -21,12 +21,11 @@ public class Person {
     }
 
 
+    public String getName() {
+        return name;
+    }
 
-
-
-
-
-    public Person( String name, String password, Account account) {
+    public Person(String name, String password) {
         this.name = name;
         this.password = password;
     }

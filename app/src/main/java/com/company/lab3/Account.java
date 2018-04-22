@@ -10,9 +10,18 @@ public class Account extends Person {
     private String balance;
     private Person person;
 
-    public Account(String name, String password, Account account) {
-        super(name, password, account);
+    public Account(String name, String password) {
+        super(name, password);
+
     }
+
+    public Account(String name, String password, String balance) {
+        super(name, password);
+        this.balance = balance;
+
+    }
+
+
 
 
     public String getBalance() {

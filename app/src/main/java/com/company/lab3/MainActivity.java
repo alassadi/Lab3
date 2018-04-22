@@ -1,5 +1,7 @@
 package com.company.lab3;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,9 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 //updateBalance();
 
                 //updateDatabase();
-                //Set new balance to Textview from Database
+                //Set new balance to Textview from com.company.lab3.Database
                 //activity refresh the balance/activity
-
             }
         });
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         return sum;
 
     }
-    //update Database with new Balance
+    //update com.company.lab3.Database with new Balance
 
 
 
