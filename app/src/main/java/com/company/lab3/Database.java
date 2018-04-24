@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class Database extends SQLiteOpenHelper {
 
     //DATABASE NAME
-    public static final String DATABASE_NAME = "loopwiki.com";
+    public static final String DATABASE_NAME = "Bank";
 
     //DATABASE VERSION
     public static final int DATABASE_VERSION = 1;
@@ -85,14 +85,14 @@ public class Database extends SQLiteOpenHelper {
     public Account Authenticate(Account user) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USERS,// Selecting Table
-                new String[]{KEY_USER_NAME, KEY_PASSWORD},//Selecting columns want to query
+                new String[]{KEY_USER_NAME, KEY_PASSWORD, KEY_BALANCE},//Selecting columns want to query
                 KEY_USER_NAME + "=?",
                 new String[]{user.getName()},//Where clause
                 null, null, null);
 
         if (cursor != null && cursor.moveToFirst() && cursor.getCount() > 0) {
             //if cursor has value then in user database there is user associated with this given email
-            Account user1 = new Account(cursor.getString(0), cursor.getString(1));
+            Account user1 = new Account(cursor.getString(0), cursor.getString(1), cursor.getString(2));
 
             //Match both passwords check they are same or not
             if (user.getPassword().equalsIgnoreCase(user1.getPassword())) {
@@ -104,20 +104,21 @@ public class Database extends SQLiteOpenHelper {
         return null;
     }
 
-    public boolean isEmailExists(String email) {
+    public String showBalance(String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_USERS,// Selecting Table
-                new String[]{KEY_ID, KEY_USER_NAME, KEY_PASSWORD},//Selecting columns want to query
+                new String[]{KEY_USER_NAME, KEY_BALANCE},//Selecting columns want to query
                 KEY_USER_NAME + "=?",
-                new String[]{email},//Where clause
+                new String[]{name},//Where clause
                 null, null, null);
 
         if (cursor != null && cursor.moveToFirst() && cursor.getCount() > 0) {
             //if cursor has value then in user database there is user associated with this given email so return true
-            return true;
+            Account user1 = new Account(cursor.getString(0), cursor.getString(1));
+            return user1.getBalance();
         }
 
-        //if email does not exist return false
-        return false;
+        //if name does not exist return false
+        return "0";
     }
 }

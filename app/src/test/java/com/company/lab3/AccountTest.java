@@ -29,8 +29,6 @@ public class AccountTest {
         expectedBalance = "100";
         actualBalance = account.getBalance();
         Assert.assertEquals(expectedBalance, actualBalance);
-
-
     }
 
     @Test
@@ -44,7 +42,6 @@ public class AccountTest {
 
 
     }
-
 
 
 }

@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                     String Email = user_name.getText().toString();
                     String Password = user_password.getText().toString();
 
+
                     //Authenticate user
                     Account currentUser = sqliteHelper.Authenticate(new Account(Email, Password));
 
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //User Logged in Successfully Launch You home screen activity
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("USER_NAME", currentUser.getBalance());
                         startActivity(intent);
                         finish();
                     } else {
@@ -74,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (true){
                     Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
-
                 }
             }
         });

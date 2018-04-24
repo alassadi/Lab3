@@ -21,7 +21,11 @@ public class Account extends Person {
 
     }
 
+    public Account(String name, String password, Account balance) {
+        super(name, password);
+        this.balance = balance.balance;
 
+    }
 
 
     public String getBalance() {

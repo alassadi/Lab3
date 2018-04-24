@@ -1,7 +1,5 @@
 package com.company.lab3;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView balance;
     private EditText withdrawMoney;
     private Account mAccount;
+    private Database sqliteHelper;
+    private String balanceString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         balance = (TextView)findViewById(R.id.balance);
         withdrawMoney = (EditText)findViewById(R.id.edittext);
-
+        sqliteHelper = new Database(this);
+        balanceString = getIntent().getStringExtra("USER_NAME");
+        balance.setText(balanceString);
 
         withdraw = (Button)findViewById(R.id.withdraw);
 
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
                 //activity refresh the balance/activity
             }
         });
-
     }
 
     public double updateBalance(){
@@ -48,10 +49,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //update com.company.lab3.Database with new Balance
-
-
-
-
-
 
 }
