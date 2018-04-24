@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         withdraw = (Button)findViewById(R.id.withdraw);
 
-        newbalance = (TextView)findViewById(R.id.newbalance);
+        newbalance = (TextView) findViewById(R.id.newbalance);
 
         withdraw.setOnClickListener( new View.OnClickListener(){
             public void onClick (View v){
@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public String withdraw(){
+    public String withdraw() {
         double balance1 = Double.parseDouble(sqliteHelper.getBalance());
         double withdraw1 = Double.parseDouble(withdrawMoney.getText().toString());
 
@@ -56,10 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //update com.company.lab3.Database with new Balance
-
-
-
-
 
 
 }

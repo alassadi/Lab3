@@ -11,14 +11,14 @@ import static org.junit.Assert.*;
 public class PersonTest {
 
     private Person person;
-    private  String name;
+    private String name;
     private String passwort;
     private String expectedPassword;
     private String expectedName;
     private String actualName, actualPassword;
 
-    public PersonTest(){
-        person = new Person("Name","123456");
+    public PersonTest() {
+        person = new Person("Name", "123456");
     }
 
     @Test
