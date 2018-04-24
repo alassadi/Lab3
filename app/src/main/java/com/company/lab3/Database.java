@@ -121,4 +121,24 @@ public class Database extends SQLiteOpenHelper {
         //if name does not exist return false
         return "0";
     }
+
+    public String getBalance (){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS,
+                new String [] {KEY_USER_NAME,KEY_BALANCE},
+                KEY_USER_NAME + "=?",
+                new String[]{"Name"},
+                null,null,null);
+
+        if (cursor != null && cursor.moveToFirst() && cursor.getCount() > 0) {
+            //if cursor has value then in user database there is user associated with this given email so return true
+
+            String balance;
+            balance = cursor.getString(1);
+            return balance;
+        }
+        return null;
+
+    }
 }

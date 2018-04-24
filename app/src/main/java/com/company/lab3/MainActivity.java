@@ -12,42 +12,54 @@ public class MainActivity extends AppCompatActivity {
     private Button withdraw;
     private TextView balance;
     private EditText withdrawMoney;
+    private TextView newbalance;
     private Account mAccount;
-    private Database sqliteHelper;
-    private String balanceString;
+    Database sqliteHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sqliteHelper = new Database(this);
 
         balance = (TextView)findViewById(R.id.balance);
+
+        balance.setText(sqliteHelper.getBalance());
+
         withdrawMoney = (EditText)findViewById(R.id.edittext);
-        sqliteHelper = new Database(this);
-        balanceString = getIntent().getStringExtra("USER_NAME");
-        balance.setText(balanceString);
+
 
         withdraw = (Button)findViewById(R.id.withdraw);
 
+        newbalance = (TextView)findViewById(R.id.newbalance);
+
         withdraw.setOnClickListener( new View.OnClickListener(){
             public void onClick (View v){
-                updateBalance();
+                newbalance.setText(withdraw());
                 //updateDatabase();
                 //Set new balance to Textview from com.company.lab3.Database
                 //activity refresh the balance/activity
             }
         });
+
     }
 
-    public double updateBalance(){
-        double balance1 = Double.parseDouble(balance.toString());
-        double withdraw1 = Double.parseDouble(withdrawMoney.toString());
+
+
+    public String withdraw(){
+        double balance1 = Double.parseDouble(sqliteHelper.getBalance());
+        double withdraw1 = Double.parseDouble(withdrawMoney.getText().toString());
 
         double sum = balance1 - withdraw1;
 
-        return sum;
+        return String.valueOf(sum);
 
     }
     //update com.company.lab3.Database with new Balance
+
+
+
+
+
 
 }
